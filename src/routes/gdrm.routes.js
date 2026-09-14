@@ -5,11 +5,15 @@ const { requireModule } = require('../middleware/role.middleware');
 const reservasi = require('../controllers/gdrm/reservasi.controller');
 const planning = require('../controllers/gdrm/planning.controller');
 const serviceLevel = require('../controllers/gdrm/serviceLevel.controller');
+const dashboard = require('../controllers/gdrm/dashboard.controller');
 
 const router = express.Router();
 
 // Semua endpoint di bawah ini butuh login DAN akses ke modul GDRM
 router.use(requireAuth, requireModule('GDRM'));
+
+// Dashboard monitoring
+router.get('/monitoring/summary', dashboard.getSummary);
 
 // Reservasi
 router.post('/reservasi', reservasi.create);
